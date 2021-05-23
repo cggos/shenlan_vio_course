@@ -8,30 +8,30 @@
 
 ### 高斯牛顿求解流程
 
-<div align=center>
+<p align="center">
   <img src="images/ch05_01.png"/>
-</div>
+</p>
 
 ### 利用舒尔补加速SLAM问题的求解
 
-<div align=center>
+<p align="center">
   <img src="images/ch05_02.png"/>
-</div>
+</p>
 
 ### Solver全流程
 
-<div align=center>
+<p align="center">
   <img src="images/ch05_03.png"/>
-</div>
+</p>
 
-<div align=center>
+<p align="center">
   <img src="images/ch05_04.jpg"/>
-</div>
+</p>
 
 ## 滑动窗口算法
 
 ### 滑动窗口算法关键步骤可视化
 
-<div align=center>
+<p align="center">
   <img src="images/ch05_05.png"/>
-</div>
+</p>

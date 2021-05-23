@@ -6,21 +6,21 @@
 
 ## 从概率到最小二乘
 
-<div align=center>
+<p align=""center"">
   <img src="images/ch08_01.png"/>
-</div>
+</p>
 
 ## 最小二乘的建模关键
 
-<div align=center>
+<p align="center">
   <img src="images/ch08_02.png"/>
-</div>
+</p>
 
 ## 最小二乘问题的求解关键
 
-<div align=center>
+<p align="center">
   <img src="images/ch08_03.png"/>
-</div>
+</p>
 
 ## VIO拓展
 

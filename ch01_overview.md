@@ -12,9 +12,9 @@ VIO (Visual-Inertial Odometry): 以视觉与 IMU 融合实现里程计
 * IMU 适合计算短时间、快速的运动，可以为视觉提供快速运动时的定位；
 * 视觉适合计算长时间、慢速的运动，可利用视觉定位信息来估计 IMU 的零偏，减少 IMU 由零偏导致的发散和累积误差。
 
-<div align=center>
+<p align="center">
   <img src="images/imu_visual.jpg"/>
-</div>
+</p>
 
 ## IMU数据可与多种定位方案融合
 
@@ -24,14 +24,14 @@ VIO (Visual-Inertial Odometry): 以视觉与 IMU 融合实现里程计
 ## 松耦合 v.s. 紧耦合
 
 松耦合：
-<div align=center>
+<p align="center">
   <img src="images/couple_loose.jpg"/>
-</div>
+</p>
 
 紧耦合：
-<div align=center>
+<p align="center">
   <img src="images/couple_tight.jpg"/>
-</div>
+</p>
 
 为什么要使用紧耦合：
 

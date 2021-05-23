@@ -6,9 +6,9 @@
 
 ## VINS鲁棒初始化
 
-<div align=center>
+<p align="center">
   <img src="images/visual_imu_align.jpg"/>
-</div>
+</p>
 
 ## VINS系统
 
@@ -17,6 +17,6 @@ VINS系统三大块：
 * 初始化：系统初始状态变量(重力方向,速度,尺度等等)
 * 后端：滑动窗口优化
 
-<div align=center>
+<p align=""center"">
   <img src="images/vins.jpg"/>
-</div>
+</p>

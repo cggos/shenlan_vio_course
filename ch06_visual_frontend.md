@@ -19,9 +19,9 @@
 
 VO 方法的定性比较：
 
-<div align=center>
+<p align="center">
   <img src="images/vo_frontend_analysis.jpg"/>
-</div>
+</p>
 
 ## 关键帧
 

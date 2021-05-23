@@ -1,0 +1,53 @@
+\usepackage{xeCJK}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{makeidx}
+\usepackage{listings} 
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[level]{datetime}
+\usepackage[top=1.5cm, bottom=2cm, outer=1.5cm, inner=1.5cm, heightrounded, marginparwidth=0cm, marginparsep=0cm]{geometry}
+%\usepackage{showframe}
+
+\renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日}
+\renewcommand{\refname}{参考文献}
+\renewcommand{\tablename}{表}
+\renewcommand{\contentsname}{目录}
+
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{
+  language=c++, 
+  basicstyle=\footnotesize,  
+  % numbers=left,      
+  numberstyle=\tiny\color{gray}, 
+  stepnumber=2, 
+  numbersep=5pt,
+  backgroundcolor={},
+  showspaces=false,   
+  showstringspaces=false,
+  showtabs=false,         
+  frame=single,                   % frame around code [single, shadowbox]
+  rulecolor=\color{black}, 
+  tabsize=2,                     
+  captionpos=b,                   % caption-position bottom
+  breaklines=true,                % automatic line breaking
+  breakatwhitespace=false, 
+  % title=\lstname,               % filename included with \lstinputlisting;
+  keywordstyle=\color{blue},     
+  commentstyle=\color{dkgreen}, 
+  stringstyle=\color{mauve},     
+  escapeinside={\%*}{*)},         % if want to add LaTeX within your code
+  morekeywords={*,...}            % if want to add more keywords to the set
+}
+
+\title{第四节课习题}
+\author{高洪臣}
+\date{2019年7月12日}

@@ -1,0 +1,82 @@
+\documentclass[12pt,a4paper]{article}
+
+\include{preamble}
+
+\begin{document}
+
+\maketitle
+
+\section*{第一题} 
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=12cm]{bayers_01.png}
+\end{figure} 
+
+\begin{enumerate}
+
+\item 绘制系统的信息矩阵 $\Lambda$
+
+\begin{figure}[!h]
+  \centering
+  \input{tikz_ifm.tex}
+\end{figure}
+
+\newpage
+
+\item 绘制相机$\xi_1$被marg以后的信息矩阵 $\Lambda^{\prime}$
+
+\begin{figure}[!h]
+  \centering
+  \input{tikz_ifm_marg.tex}
+\end{figure}
+
+\end{enumerate}
+
+
+\section*{第二题}
+
+\noindent
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.3em}
+
+$$
+\boldsymbol{\Lambda} = 
+\begin{bmatrix}
+\mathbf{J_T}^T \\ \mathbf{J_P}^T
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{J_T} & \mathbf{J_P}
+\end{bmatrix} = 
+\begin{bmatrix}
+\mathbf{J_T}^T \mathbf{J_T} & \mathbf{J_T}^T \mathbf{J_P} \\
+\mathbf{J_P}^T \mathbf{J_T} & \mathbf{J_P}^T \mathbf{J_P}
+\end{bmatrix}
+$$
+
+单目Bundle Adjustment信息矩阵中补充的代码如下：
+
+\begin{lstlisting}
+H.block(j*3+6*poseNums,j*3+6*poseNums,3,3) += jacobian_Pj.transpose() * jacobian_Pj;
+H.block(i*6,j*3+6*poseNums,6,3) += jacobian_Ti.transpose() * jacobian_Pj;
+\end{lstlisting}
+
+输出结果（奇异值）的最后7维如下：
+
+\begin{lstlisting}
+1.25708e-16
+8.63763e-17
+5.18689e-17
+4.38809e-17
+2.98776e-17
+1.45304e-17
+1.59456e-18
+\end{lstlisting}
+
+奇异值的最后7维接近0，表明零空间的维度为7。
+
+\bibliographystyle{unsrt}
+\bibliography{bibfile}
+
+\end{document}
+

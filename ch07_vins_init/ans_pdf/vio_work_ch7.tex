@@ -1,0 +1,80 @@
+\documentclass[12pt,a4paper]{article}
+
+\include{preamble}
+
+\begin{document}
+
+\maketitle
+
+\noindent
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.3em}
+
+
+将第二讲的仿真数据集(视觉特征,imu 数据)接入我们的 VINS 代码,并运行出轨迹结果。
+
+\begin{enumerate}
+
+\item 代码说明
+
+\begin{itemize}
+\item 改动
+\begin{itemize}
+\item 增加文件 run\_sim.cpp 和 sim\_config.yaml
+\item 重载函数 System::PubImageData
+\item 重载函数 FeatureTracker::readImage
+\end{itemize}
+\item 运行
+\begin{lstlisting}
+cd bin/
+./run_sim <PATH_TO_SIMDATA_FOLDER>
+\end{lstlisting}
+\end{itemize}
+
+\item 仿真数据集无噪声
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=15cm]{images/trajectory.png}
+\end{figure} 
+
+\newpage
+\item 仿真数据集有噪声（不同噪声设定时,需要配置 vins 中 imu noise 大小)
+
+\begin{itemize}
+  \item with IMU noise01
+  
+  \begin{lstlisting}
+  acc_n: 0.019
+  gyr_n: 0.015
+  acc_w: 0.0001
+  gyr_w: 1.0e-5
+  \end{lstlisting}
+
+  \begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=15cm]{images/trajectory_noise01.png}
+  \end{figure} 
+  
+  \item with IMU noise02
+  
+  \begin{lstlisting}
+  acc_n: 0.019
+  gyr_n: 0.0005
+  acc_w: 0.0001
+  gyr_w: 1.0e-6
+  \end{lstlisting}
+  
+  \begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=15cm]{images/trajectory_noise02.png}
+  \end{figure} 
+
+\end{itemize}
+
+
+\end{enumerate}
+
+
+\end{document}
+

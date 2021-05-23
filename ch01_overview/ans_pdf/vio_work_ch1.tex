@@ -1,0 +1,153 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{xeCJK}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{makeidx}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[level]{datetime}
+\usepackage[top=1.5cm, bottom=2cm, outer=1.5cm, inner=2cm, heightrounded, marginparwidth=0cm, marginparsep=0cm]{geometry}
+%\usepackage{showframe}
+
+\renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日}
+\renewcommand{\refname}{参考文献}
+\renewcommand{\tablename}{表}
+
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+\title{第一节课习题}
+\author{高洪臣}
+\date{2019年6月14日}
+
+\begin{document}
+
+\maketitle
+
+\section{VIO 文献阅读} 
+
+\begin{enumerate}
+
+\item 视觉与IMU进行融合之后有何优势?
+
+\begin{table}[ht]
+\centering
+\caption{IMU vs 视觉}
+\label{tab:imu_visual}
+\begin{tabular}{|c|c|c|}
+  \hline
+  方案 & IMU & 视觉 \\ 
+  \hline
+  优势 &  
+  \tabincell{c}{快速响应\\不受成像质量影响\\角速度普遍比较准确\\可估计绝对尺度} & 
+  \tabincell{c}{不产生漂移\\直接测量旋转和平移} \\ 
+  \hline
+  劣势 & 
+  \tabincell{c}{存在零偏\\低精度IMU积分位姿发散\\高精度价格昂贵} & 
+  \tabincell{c}{受图像遮挡、运动物体干扰\\单目视觉无法测量尺度\\单目纯旋转运动无法估计\\快速运动时易丢失} \\ 
+  \hline
+\end{tabular}
+\end{table}
+
+根据表\ref{tab:imu_visual}，视觉与IMU进行融合之后，可利用视觉定位信息来估计IMU的零偏，减少IMU由零偏导致的发散和累计误差；反之，IMU可以为视觉提供快速运动时的定位。
+
+
+\item 有哪些常见的视觉+IMU融合方案?有没有工业界应用的例子?
+
+（1）视觉+IMU融合方案 \cite{robotics7030045}
+ \begin{itemize}
+ \item 基于滤波方法：紧耦合（msckf和rovio）、松耦合（ssf）
+ \item 基于优化方法：紧耦合（okvis和vins-mono）、松耦合
+ \end{itemize}
+ 
+（2）工业界应用例子
+ \begin{itemize}
+ \item 大疆无人机；
+ \item 百度Apollo无人车；
+ \item AR设备；
+ \end{itemize}
+
+\item 在学术界,VIO研究有哪些新进展?有没有将学习方法用到VIO中的例子?
+
+（1）VIO研究新进展
+ \begin{itemize}
+ \item Visual-Inertial Mapping with Non-Linear Factor Recovery
+ \item Stereo Visual Inertial LiDAR Simultaneous Localization and Mapping
+ \end{itemize}
+
+（2）将学习方法用到VIO中的例子
+ \begin{itemize}
+ \item Unsupervised Deep Visual-Inertial Odometry with Online Error Correction for RGB-D Imagery
+ \item Selective Sensor Fusion for Neural Visual-Inertial Odometry
+ \item Visual-Inertial Odometry for Unmanned Aerial Vehicle using Deep Learning
+ \item Learning by Inertia: Self-supervised Monocular Visual Odometry for Road Vehicles
+ \end{itemize}
+
+\end{enumerate}
+
+
+
+\section{四元数和李代数更新}
+
+编程验证对于小量 $\boldsymbol{\omega} = [0.01, 0.02, 0.03]^T$，两种对旋转更新的方式得到的结果非常接近。
+
+\begin{equation}
+\mathbf{R} \leftarrow \mathbf{R} \exp(\boldsymbol{\omega}^{\wedge})
+\end{equation}
+
+\begin{equation}
+\mathbf{q} \leftarrow \mathbf{q} \otimes [1, \frac{1}{2} \boldsymbol{\omega}]^T
+\end{equation}
+
+\noindent
+程序见 \textbf{code} 目录。
+
+
+
+\section{其他导数}
+
+使用右乘 $\mathfrak{so}(3)$，推导以下导数 \cite{Gao2017SLAM}
+
+\begin{equation}
+\begin{aligned}
+\frac{d(\mathbf{R}^{-1} \mathbf{p})}{d \mathbf{R}} 
+&= \frac{\partial{(\mathbf{R}^{-1} \mathbf{p})}}{\partial{\varphi}} \\
+&= \lim_{\varphi \rightarrow 0} 
+   \frac{(\mathbf{R}\exp(\varphi^{\wedge}))^{-1} \mathbf{p} - \mathbf{R}^{-1} \mathbf{p}} {\varphi} \\
+&= \lim_{\varphi \rightarrow 0} 
+   \frac{\exp(-\varphi^{\wedge}) \mathbf{R}^{-1} \mathbf{p} - \mathbf{R}^{-1} \mathbf{p}} {\varphi} \\
+&\approx 
+   \lim_{\varphi \rightarrow 0} 
+   \frac{(\mathbf{I}-\varphi^{\wedge}) \mathbf{R}^{-1} \mathbf{p} - \mathbf{R}^{-1} \mathbf{p}} {\varphi} \\
+&= \lim_{\varphi \rightarrow 0} 
+   \frac{-\varphi^{\wedge} \mathbf{R}^{-1} \mathbf{p}} {\varphi} \\
+&= \lim_{\varphi \rightarrow 0} 
+   \frac{(\mathbf{R}^{-1}\mathbf{p})^{\wedge} \varphi} {\varphi} \\
+&= (\mathbf{R}^{-1}\mathbf{p})^{\wedge}
+\end{aligned}
+\end{equation}
+
+
+\begin{equation}
+\begin{aligned}
+\frac{d \ln(\mathbf{R}_1 \mathbf{R}_2^{-1})^{\vee}}{d \mathbf{R}_2}
+&= \lim_{\phi \rightarrow 0} 
+   \frac{\ln(\mathbf{R}_1 (\mathbf{R}_2 \exp(\phi^{\wedge}))^{-1})^{\vee} - \ln(\mathbf{R}_1 \mathbf{R}_2^{-1})^{\vee}} {\phi} \\
+&= \lim_{\phi \rightarrow 0} 
+   \frac{\ln(\mathbf{R}_1 \exp(-\phi^{\wedge}) \mathbf{R}_2^{-1})^{\vee}  - \ln(\mathbf{R}_1 \mathbf{R}_2^{-1})^{\vee}} {\phi} \\
+&= \lim_{\phi \rightarrow 0} 
+   \frac{\ln(\mathbf{R}_1 \mathbf{R}_2^{-1} \exp((-\mathbf{R}_2 \phi)^{\wedge}))^{\vee} - \ln(\mathbf{R}_1\mathbf{R}_2^{-1})^{\vee}} {\phi} \\
+&= \lim_{\phi \rightarrow 0} 
+   \frac{\ln(\mathbf{R}_1\mathbf{R}_2^{-1})^{\vee} + \mathbf{J}_r^{-1} (-\mathbf{R}_2 \phi) - \ln(\mathbf{R}_1\mathbf{R}_2^{-1})^{\vee}} {\phi} \\
+&= -\mathbf{J}_r^{-1}(\ln(\mathbf{R}_1\mathbf{R}_2^{-1})^{\vee}) \mathbf{R}_2
+\end{aligned}
+\end{equation}
+
+
+\bibliographystyle{unsrt}
+\bibliography{bibfile}
+
+\end{document}
+

@@ -17,6 +17,6 @@
 
 ## Certificate
 
-<p align=""center"">
+<p align="center">
   <img src="certificate.jpg">
 </p>

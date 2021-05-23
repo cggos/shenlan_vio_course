@@ -17,6 +17,6 @@ VINS系统三大块：
 * 初始化：系统初始状态变量(重力方向,速度,尺度等等)
 * 后端：滑动窗口优化
 
-<p align=""center"">
+<p align="center">
   <img src="images/vins.jpg"/>
 </p>

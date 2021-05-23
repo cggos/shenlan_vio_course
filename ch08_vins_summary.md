@@ -6,7 +6,7 @@
 
 ## 从概率到最小二乘
 
-<p align=""center"">
+<p align="center">
   <img src="images/ch08_01.png"/>
 </p>
 

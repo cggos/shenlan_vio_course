@@ -2,6 +2,9 @@
 
 -----
 
+<p align="left">
+  <img src="images/ch04_00.png"/>
+</p>
 
 ## References
 

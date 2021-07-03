@@ -35,3 +35,9 @@
 <p align="center">
   <img src="images/ch05_05.png"/>
 </p>
+
+### VINS-Mono 中的滑动窗口算法
+
+<p align="center">
+  <img src="images/ch05_06.png"/>
+</p>
